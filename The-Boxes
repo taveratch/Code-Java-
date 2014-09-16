@@ -1,0 +1,52 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+
+public class Lab2 {
+
+	public static void main(String[] args) throws IOException{
+		BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
+		System.out.print("Enter n: ");
+		int n = Integer.parseInt(buff.readLine());
+		String aS="",b="",space="";
+		int y= 3+(4*(n-1)),ref=1;
+		String[] reverse = new String[(n*9)-1];
+		for(int k=1;k<=y;k++){
+			aS += "X";
+		}
+		StringBuffer a = new StringBuffer(aS);
+		int c=1,d=1;
+		for(int i = 1;i<=(n*2)-1;i++){
+			if(ref==1){
+				for(int j=c;j<y-d;j++){
+					space +=" ";
+				}
+				ref=2;
+			}else if(ref==2){
+				for(int j=c;j<y-d;j++){
+					space +="X";
+				}
+				ref=1;
+			}
+			//if(i!=(n*2)-1){
+				System.out.println(a);
+				reverse[i-1] = a.toString();
+			//}
+			a = a.replace(c,y-d, space);
+			if(i==(n*2)-1){
+				aS = a.toString();
+				aS.replace("XXX","X X" );
+				System.out.println(aS);
+				reverse[(n*2)-1] = aS.toString();
+			}
+			c++;
+			d++;
+			space="";
+		}
+		for(int i = (n*2)-2;i>=0;i--){
+			System.out.println(reverse[i]);
+		}
+		
+ }
+}
