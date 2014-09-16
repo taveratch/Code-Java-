@@ -1,0 +1,31 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class TaweeLab {
+	public static BigInteger fibonacci(int n){
+		
+		BigInteger[] big = new BigInteger[n+1];
+		if(n==0){
+			big[0]=BigInteger.ZERO;
+		}else{
+			big[0]=BigInteger.ZERO;
+			big[1]=BigInteger.ONE;
+		}
+		
+		
+		if(n>=2){
+			for(int i=2;i<=n;i++){
+				big[i] = big[i-1].add(big[i-2]);
+			}	
+		}
+		
+		return big[n];
+	}
+	public static void main (String [] args){
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Input Fibonacci term: ");
+		int n = scan.nextInt();
+		System.out.printf("Fibonacci Number is %d.",fibonacci(n));
+	}
+		
+}
