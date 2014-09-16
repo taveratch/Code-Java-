@@ -1,0 +1,47 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class TaweeLab {
+
+	public static void main (String [] args){
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Height of Pyramid: ");
+		int n = scan.nextInt();
+		if(n==1){
+			System.out.println(1);
+		}else{
+			String[] reverse = new String[n];
+		String str = "";
+		int count=2;
+		for(int i =1;i<=(n*2)-1;i++){
+			str+="1";
+		}
+		StringBuffer strbuff = new StringBuffer(str);
+		int range=1;
+		String replace="";
+		System.out.println(str);
+		reverse[0]=str;
+		for(int j=1;j<=n;j++){
+			for(int i=0;i<strbuff.length()-range-range;i++){
+				replace+=""+count;
+			}
+			strbuff = strbuff.replace(range, strbuff.length()-range, replace);
+			System.out.println(strbuff);
+			reverse[j]=strbuff.toString();
+			replace="";
+			range++;
+			count++;
+			if(range==n){
+				break;
+			}
+		}
+		for(int i=reverse.length-2;i>=0;i--){
+			System.out.println(reverse[i]);
+		}
+		
+	
+		}
+		
+	}
+		
+}
