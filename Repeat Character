@@ -1,4 +1,4 @@
-
+//Print the same character in the string
 import java.util.Scanner;
 public class TaweeLab {
 
