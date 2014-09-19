@@ -1,0 +1,22 @@
+
+import java.util.Scanner;
+public class TaweeLab {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+	String s = scan.nextLine();
+	s = s.replaceAll(" ", "");
+	for(int i =0;i<s.length();i++){
+		char chr = s.charAt(i);
+		String chrStr = Character.toString(chr);
+		s= s.replaceFirst(chrStr,"/" );
+		
+		if(!chrStr.equals("/")){
+		if(s.indexOf(chrStr)!=i&&s.indexOf(chrStr)!=-1){
+			System.out.print(chrStr + " ");
+		}
+		}
+		s = s.replaceAll(chrStr,"/");
+	}
+	}
+}
