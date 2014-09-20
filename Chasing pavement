@@ -1,0 +1,64 @@
+//elab-source: TaweeLab.java
+import java.util.Scanner;
+
+
+public class TaweeLab {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int n = scan.nextInt();
+		int[][] mountain = new int[n][n];
+		for(int i=0;i<mountain.length;i++){
+			for(int j=0;j<mountain.length;j++){
+				mountain[i][j] = scan.nextInt();
+			}
+		}
+		int x=0;
+		int y=0;
+		int check=0;
+		for(int i=0;i<mountain.length;i++){
+			for(int j=0;j<mountain.length;j++){
+				if(mountain[i][j]==1){
+					x=j;
+					y=i;
+				}
+			}
+		}
+		System.out.println(x+","+y);
+		while(true){
+		if(x==0&&y==0){
+			if(mountain[y][x]==mountain[y][x+1]+1){
+				x++;
+			}else if(mountain[y][x]==mountain[y+1][x]+1){
+				y++;
+				
+			}
+		}else if(x==0&&y!=0){
+			if(mountain[y][x]==mountain[y][x+1]+1){
+				x++;
+			}
+		}else if(x!=0&&y==0){
+			if(mountain[y][x]==mountain[y+1][x]+1){
+				y++;
+			}
+		}else{
+			if(mountain[y][x]==mountain[y][x+1]+1){
+				x++;
+			}else if(mountain[y][x]==mountain[y+1][x]+1){
+				y++;
+			}else if(mountain[y][x]==mountain[y-1][x]+1){
+				y--;
+			}else if(mountain[y][x]==mountain[y][x-1]+1){
+				x--;
+			}else{
+				System.out.println(mountain[y][x]);
+				break;
+			}
+		}
+		}
+	}
+			
+	}
