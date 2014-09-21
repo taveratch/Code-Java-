@@ -1,0 +1,18 @@
+public class TaweeLab {
+	
+	public static void main(String args[]) {
+		SampleThread("A");
+		SampleThread("B");
+		SampleThread("C");
+	}
+	public static void SampleThread(final String s){
+		Runnable run = new Runnable(){
+			public void run(){
+				for(int i =0;i<20;i++){
+				System.out.printf("Thread %s\n",s);
+				}
+				}
+		};
+		new Thread(run).start();
+	}
+}
