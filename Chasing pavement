@@ -1,64 +1,99 @@
-//elab-source: TaweeLab.java
+//elab-source: TaweeOne.java
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
+public class TaweeOne {
 
-public class TaweeLab {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		int n = scan.nextInt();
-		int[][] mountain = new int[n][n];
-		for(int i=0;i<mountain.length;i++){
-			for(int j=0;j<mountain.length;j++){
-				mountain[i][j] = scan.nextInt();
-			}
-		}
-		int x=0;
-		int y=0;
-		int check=0;
-		for(int i=0;i<mountain.length;i++){
-			for(int j=0;j<mountain.length;j++){
-				if(mountain[i][j]==1){
-					x=j;
-					y=i;
+	public static boolean checkAround(int[][] mountain, int x, int y, int i) {
+		boolean check = false;
+		for (int row = 0; row < mountain.length; row++) {
+			for (int column = 0; column < mountain.length; column++) {
+				if (mountain[row][column] == i + 1) {
+					if (column == x - 1 && row == y || column == x + 1
+							&& row == y || column == x && row == y + 1
+							|| column == x && row == y - 1) {
+						check = true;
+					}
 				}
 			}
 		}
-		System.out.println(x+","+y);
-		while(true){
-		if(x==0&&y==0){
-			if(mountain[y][x]==mountain[y][x+1]+1){
-				x++;
-			}else if(mountain[y][x]==mountain[y+1][x]+1){
-				y++;
-				
-			}
-		}else if(x==0&&y!=0){
-			if(mountain[y][x]==mountain[y][x+1]+1){
-				x++;
-			}
-		}else if(x!=0&&y==0){
-			if(mountain[y][x]==mountain[y+1][x]+1){
-				y++;
-			}
-		}else{
-			if(mountain[y][x]==mountain[y][x+1]+1){
-				x++;
-			}else if(mountain[y][x]==mountain[y+1][x]+1){
-				y++;
-			}else if(mountain[y][x]==mountain[y-1][x]+1){
-				y--;
-			}else if(mountain[y][x]==mountain[y][x-1]+1){
-				x--;
-			}else{
-				System.out.println(mountain[y][x]);
-				break;
+		return check;
+	}
+
+	public static int newX(int[][] mountain, int i) {
+		int newX = -100;
+		for (int row = 0; row < mountain.length; row++) {
+			for (int column = 0; column < mountain.length; column++) {
+				if (mountain[row][column] == i) {
+					newX = column;
+				}
 			}
 		}
+		return newX;
+	}
+
+	public static int newY(int[][] mountain, int i) {
+		int newY = -100;
+		for (int row = 0; row < mountain.length; row++) {
+			for (int column = 0; column < mountain.length; column++) {
+				if (mountain[row][column] == i) {
+					newY = row;
+				}
+			}
+		}
+		return newY;
+	}
+
+	public static int detectX(int[][] mountain) {
+		int x = 0;
+		for (int i = 0; i < mountain.length; i++) {
+			for (int k = 0; k < mountain.length; k++) {
+				if (mountain[i][k] == 1) {
+					x = k;
+				}
+			}
+		}
+		return x;
+	}
+
+	public static int detectY(int[][] mountain) {
+		int y = 0;
+		for (int i = 0; i < mountain.length; i++) {
+			for (int k = 0; k < mountain.length; k++) {
+				if (mountain[i][k] == 1) {
+					y = i;
+				}
+			}
+		}
+		return y;
+	}
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int n = scan.nextInt();
+		if (n >= 1 && n <= 10) {
+
+			int[][] mountain = new int[n][n];
+			for (int i = 0; i < mountain.length; i++) {
+				for (int j = 0; j < mountain.length; j++) {
+					mountain[i][j] = scan.nextInt();
+				}
+			}
+			int x = detectX(mountain);
+			int y = detectY(mountain);
+			for (int i = 1; i <= n * n; i++) {
+				if (i != 1) {
+					x = newX(mountain, i);
+					y = newY(mountain, i);
+				}
+				if (checkAround(mountain, x, y, i) == false) {
+					System.out.println(i);
+					break;
+				}
+
+			}
 		}
 	}
-			
-	}
+
+}
