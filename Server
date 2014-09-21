@@ -1,0 +1,58 @@
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+
+
+public class Server extends Thread{
+	static int a=0;
+	static int b=0;
+	static String name;
+	public static void Listening(final int port) throws Exception{
+		final ServerSocket serverSocket = new ServerSocket(port);
+		final String command="";
+		
+		Runnable run = new Runnable(){
+			
+			public void run(){
+				
+				while(true){
+				try{
+					if(a==0){
+						System.out.println("Waiting for client on port " + serverSocket.getLocalPort());
+						a=1;
+					}
+					Socket server = serverSocket.accept();
+					//System.out.println("Just connected to "+ server.getRemoteSocketAddress());
+					DataInputStream inFromClient  = new DataInputStream(server.getInputStream());
+					//System.out.println("----------------------");
+					if(b==0){
+						name = inFromClient.readUTF();
+						b=1;
+					}
+					System.out.println("Message from "+name+" : " + inFromClient.readUTF());
+					//System.out.println("----------------------");
+					System.out.println();
+					DataOutputStream outToClient = new DataOutputStream(server.getOutputStream());
+					outToClient.writeUTF("Done");
+					server.close();
+				}catch (Exception e){
+					
+				}
+				}
+			}
+		};
+		new Thread(run).start();
+		
+	}
+	 
+	public static void main(String[] args) throws Exception {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Enter listening port : ");
+		int port = scan.nextInt();
+		Listening(port);
+		
+	}
+
+}
